@@ -195,3 +195,16 @@ code into a shared repository several times a day. Each check-in is then verifie
 - equals()
 - ~~hashCode()~~
 - Equal Null
+
+#### Frank
+##### TO-DO List
+- $5 + 10 CHF = $10 (with rate of 2:1)
+- ~~$5 * 2 = $10~~
+- ~~Make “amount” private~~
+- ~~Dollar side effects?~~
+- Money Rounding?
+- ~~equals()~~
+- hashCode()
+- Equal Null
+- Equal Object
+- **5 CHF * 2 = 10 CHF**

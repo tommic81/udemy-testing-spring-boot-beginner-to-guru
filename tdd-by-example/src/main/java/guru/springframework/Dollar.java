@@ -1,7 +1,7 @@
 package guru.springframework;
 
 public class Dollar {
-    int amout;
+    private int amout;
 
     public Dollar(int amount) {
         this.amout = amount;

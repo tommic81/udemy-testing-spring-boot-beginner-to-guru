@@ -142,23 +142,33 @@ code into a shared repository several times a day. Each check-in is then verifie
 
 #### Multi Currency Money
 
-#### TO-DO List
+##### TO-DO List
 
 - $5 + 10 CHF = $10 (with rate of 2:1)
-- $5 * 2 = $10
+- **$5 * 2 = $10**
 - Make “amount” private
 - Dollar side effects?
 - Money Rounding?
 
-#### Technical Requirements For Report
+##### Technical Requirements For Report
 
 - Need to be able to add amounts in two different currencies and convert result given a set of exchange rates
 - Need to be able to multiply an amount by a number (number of shares) and receive an amount
 
-#### Steps of TDD
+##### Steps of TDD
 1. Made List of Test we needed - To-Do List
 2.  Told a story about how we wanted to view one operation (in test)
 3.  Ignored details of JUnit
 4.  Made test compile with stubs (minimal code)
 5.  Made test run with awful AWFUL code
 6. Gradually updated working code - replacing constants with variables
+
+
+#### Degenerate Objects
+
+##### TO-DO List
+- $5 + 10 CHF = $10 (with rate of 2:1)
+- ~~$5 * 2 = $10~~
+- Make “amount” private
+- **Dollar side effects?**
+- Money Rounding

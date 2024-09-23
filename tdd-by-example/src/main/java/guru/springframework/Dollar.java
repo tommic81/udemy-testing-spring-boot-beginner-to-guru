@@ -10,4 +10,11 @@ public class Dollar {
     public Dollar times(int multiplier) {
         return new Dollar(amout * multiplier);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        Dollar dollar = (Dollar) o;
+        return amout == dollar.amout;
+    }
+
 }

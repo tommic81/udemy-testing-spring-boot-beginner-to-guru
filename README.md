@@ -315,7 +315,7 @@ code into a shared repository several times a day. Each check-in is then verifie
 - ~~Common times()~~
 - ~~Compare Francs With Dollars~~
 - ~~Currency~~
-- Delete testFrancMultiplication?
+- ~~Delete testFrancMultiplication?~~
 
 #### Addition, Finally
 - Starting with a simpler example of $5 + $5 = $10
@@ -342,4 +342,35 @@ code into a shared repository several times a day. Each check-in is then verifie
 - ~~Common times()~~
 - ~~Compare Francs With Dollars~~
 - ~~Currency~~
-- Delete testFrancMultiplication?
+- ~~Delete testFrancMultiplication?~~
+
+#### Make It
+- Remove fake implementation
+- Long term Return a Money object from plus operation
+- Terms:
+  - Augend - First value in an addition operation. The ‘3’ in 3 + 6.
+  - Addend - Second value in an addition operation. The ‘6’ in 3 + 6.
+- Introduce Sum object - implementation of Expression
+  - Will have two properties - a Money Augend, and a Money Addend
+- Implement reduce operation on Bank (currently fake)
+  - Create initial implementation
+  - Refactor to make implementation cleaner
+##### TO-DO List
+- $5 + 10 CHF = $10 (with rate of 2:1)
+- $5 + $5 = $10
+- Return Money from $5 + $5
+- **Bank.reduce(Money)**
+- ~~$5 * 2 = $10~~
+- ~~Make “amount” private~~
+- ~~Dollar side effects?~~
+- Money Rounding?
+- ~~equals()~~
+- hashCode()
+- Equal Null Equal Object
+- ~~5 CHF * 2 = 10 CHF~~
+- ~~Dollar/Franc Duplication~~
+- ~~Common equals()~~
+- ~~Common times()~~
+- ~~Compare Francs With Dollars~~
+- ~~Currency~~
+- ~~Delete testFrancMultiplication?~~

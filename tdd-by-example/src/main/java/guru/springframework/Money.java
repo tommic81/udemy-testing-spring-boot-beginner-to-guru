@@ -12,12 +12,11 @@ public class Money implements Expression {
 
     public static Money dollar(int amount) {
         return new Money(amount, "USD");
-    }
 
+    }
     public static Money frank(int amount) {
         return new Money(amount, "CHF");
     }
-
     protected String currency() {
         return currency;
     }
@@ -36,16 +35,17 @@ public class Money implements Expression {
                 '}';
     }
 
-    public Money times(int multiplier) {
+    public Expression times(int multiplier) {
         return new Money(amount * multiplier, currency);
-    }
-
-    public Expression plus(Money addend) {
-        return new Sum(this, addend);
     }
 
     @Override
     public Money reduce(Bank bank, String to) {
         return new Money(amount / bank.rate(this.currency, to), to);
+    }
+
+    @Override
+    public Expression plus(Expression addend){
+        return new Sum(this, addend);
     }
 }

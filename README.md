@@ -436,3 +436,30 @@ code into a shared repository several times a day. Each check-in is then verifie
 - ~~Compare Francs With Dollars~~
 - ~~Currency~~
 - ~~Delete testFrancMultiplication?~~
+
+#### Abstraction, Finally
+- Implement Plus on Sum
+- Add times to Expression
+- Implement times on Sum
+- ##### TO-DO List
+- ~~$5 + 10 CHF = $10 (with rate of 2:1)~~
+- ~~$5 + $5 = $10~~
+- ~~Return Money from $5 + $5~~
+- ~~Sum.plus~~
+- ~~Expression.times~~
+- ~~Reduce Money with Conversion~~
+- ~~Bank.reduce(Money)~~
+- ~~$5 * 2 = $10~~
+- ~~Make “amount” private~~
+- ~~Dollar side effects?~~
+- Money Rounding?
+- equals()
+- hashCode()
+- Equal Null Equal Object
+- ~~5 CHF * 2 = 10 CHF~~
+- ~~Dollar/Franc Duplication~~
+- ~~Common equals()~~
+- ~~Common times()~~
+- ~~Compare Francs With Dollars~~
+- ~~Currency~~
+- ~~Delete testFrancMultiplication?~~

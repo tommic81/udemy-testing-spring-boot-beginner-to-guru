@@ -5,12 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>guru.springframework</groupId>
-    <artifactId>tdd-by-example</artifactId>
+    <artifactId>intro-junit5</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
-    <name>tdd-by-example</name>
-    <description>Test Driven Development By Example</description>
+    <name>intro-junit5</name>
+    <description>Introduction to JUnit 5</description>
 
     <organization>
         <name>Spring Framework Guru</name>

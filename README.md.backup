@@ -495,3 +495,5 @@ code into a shared repository several times a day. Each check-in is then verifie
 |@Tag|Declare ‘tags’ for filtering tests|
 |@Disabled|Disable test or test class|
 |@ExtendWith|Used to register extensions|
+
+## Testing Java with JUnit 5

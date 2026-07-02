@@ -679,3 +679,27 @@ public interface ControllerTests {
 ```
 
 ### Repeating Tests with JUnit 5
+```
+  @RepeatedTest(value = 10, name = "{displayName} : {currentRepetition} - {totalRepetitions}")
+    @DisplayName("My Repeated Test")
+    void myRepeatedTest() {
+        //todo - impl
+    }
+```
+
+### JUnit Test Dependency Injection
+
+#### Parameter Resolver
+- JUnit 5 Defines a Parameter Resolver API to resolve parameters at runtime
+- Allows JUnit to inject parameters into test methods
+- While extensible, there are 3 built in resolvers:
+  - TestInfo - Provides information about the test name, method, test class, test tags
+  - RepetitionInfo - Provides Information about the test repetition
+  - TestReporter - Allows you to publish runtime information for test reporting
+  
+```java
+@RepeatedTest(5)
+    void myRepeatedTestWithDI(TestInfo testInfo, RepetitionInfo repetitionInfo) {
+        System.out.println(testInfo.getDisplayName() + ": " + repetitionInfo.getCurrentRepetition());
+    }
+```

@@ -497,4 +497,51 @@ code into a shared repository several times a day. Each check-in is then verifie
 |@ExtendWith|Used to register extensions|
 
 ## Testing Java with JUnit 5
-### JUnit Assertions
+### JUnit Grouped Assertions
+- `assertAll()` - groups assertions
+```java
+    @Test
+    void groupedAssertions(){
+        //given
+        Person person = new Person(1l, "Joe", "Buck");
+
+        //then
+        assertAll("Test Props Set",
+                () -> assertEquals( "Joe", person.getFirstName()),
+                () -> assertEquals( "Buck", person.getLastName()));
+    }
+
+    @Test
+    void groupedAssertionsMsgs(){
+        //given
+        Person person = new Person(1l, "Joe", "Buck");
+
+        //then
+        assertAll("Test Props Set",
+                () -> assertEquals("Joe", person.getFirstName(),  "First Name Failed"),
+                () -> assertEquals("Buck", person.getLastName(),  "Last Name Failed"));
+    }
+```
+### JUnit Dependent Assertions
+```
+    assertAll("Properties Test",
+                () -> assertAll("Person Properties",
+                        () -> assertEquals("Joe", owner.getFirstName(), "First Name Did not Match"),
+                        () -> assertEquals("Buck", owner.getLastName())),
+                () -> assertAll("Owner Properties",
+                        () -> assertEquals("Key West", owner.getCity(), "City Did Not Match"),
+                        () -> assertEquals("1231231234", owner.getTelephone())
+                ));
+```
+### Skipping JUnit Tests
+- ` @Disabled` annotation switches off a test method or the whole class
+
+### JUnit Test Display Names
+- ` @DisplayName("Test Proper View name is returned for index page")` -rename a test's method in the results
+
+### Testing expected exceptions
+```java
+   assertThrows(ValueNotFoundException.class, () -> {
+            controller.oopsHandler();
+        });
+```

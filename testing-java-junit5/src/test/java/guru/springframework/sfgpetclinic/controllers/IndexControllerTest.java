@@ -1,11 +1,15 @@
 package guru.springframework.sfgpetclinic.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class IndexControllerTest {
     IndexController controller;
@@ -33,5 +37,68 @@ class IndexControllerTest {
         });
        /* assertTrue("notimplemented".equals(controller.oopsHandler()), () -> "This is some expensive" + "Message to build"+
                 "for my test");*/
+    }
+
+    @Disabled("Demo of timeout")
+    @Test
+    void testTimeOut() {
+
+        assertTimeout(Duration.ofMillis(100), () -> {
+            Thread.sleep(5000);
+
+            System.out.println("I got here");
+        });
+    }
+
+    @Disabled("Demo of timeout")
+    @Test
+    void testTimeOutPrempt() {
+
+        assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
+            Thread.sleep(5000);
+
+            System.out.println("I got here 2342342342342");
+        });
+    }
+
+    @Test
+    void testAssumptionTrue() {
+        assumeTrue("GURU".equalsIgnoreCase(System.getenv("GURU_RUNTIME")));
+    }
+
+    @Test
+    void testAssumptionTrueAssumptionIsTrue() {
+
+        assumeTrue("GURU".equalsIgnoreCase("GURU"));
+    }
+
+    @EnabledOnOs(OS.MAC)
+    @Test
+    void testMeOnMacOS() {
+    }
+
+    @EnabledOnOs(OS.WINDOWS)
+    @Test
+    void testMeOnWindows() {
+    }
+
+    @EnabledOnJre(JRE.JAVA_8)
+    @Test
+    void testMeOnJava8() {
+    }
+
+    @EnabledOnJre(JRE.JAVA_11)
+    @Test
+    void testMeOnJava11() {
+    }
+
+    @EnabledIfEnvironmentVariable(named = "USER", matches = "jt")
+    @Test
+    void testIfUserJT() {
+    }
+
+    @EnabledIfEnvironmentVariable(named = "USER", matches = "fred")
+    @Test
+    void testIfUserFred() {
     }
 }

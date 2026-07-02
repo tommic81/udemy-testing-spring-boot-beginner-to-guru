@@ -545,3 +545,53 @@ code into a shared repository several times a day. Each check-in is then verifie
             controller.oopsHandler();
         });
 ```
+### Testing Timeouts
+```java
+     assertTimeout(Duration.ofMillis(100), () -> {
+            Thread.sleep(5000);
+
+            System.out.println("I got here");
+        });
+```
+### Junit Assumptions
+- Throws `org.opentest4j.TestAbortedException` instead of failing a test
+
+```
+   @Test
+    void testAssumptionTrue() {
+        assumeTrue("GURU".equalsIgnoreCase(System.getenv("GURU_RUNTIME")));
+    }
+```
+### Conditional JUnit Test Execution
+```java
+ @EnabledOnOs(OS.MAC)
+    @Test
+    void testMeOnMacOS() {
+    }
+
+    @EnabledOnOs(OS.WINDOWS)
+    @Test
+    void testMeOnWindows() {
+    }
+
+    @EnabledOnJre(JRE.JAVA_8)
+    @Test
+    void testMeOnJava8() {
+    }
+
+    @EnabledOnJre(JRE.JAVA_11)
+    @Test
+    void testMeOnJava11() {
+    }
+
+    @EnabledIfEnvironmentVariable(named = "USER", matches = "jt")
+    @Test
+    void testIfUserJT() {
+    }
+
+    @EnabledIfEnvironmentVariable(named = "USER", matches = "fred")
+    @Test
+    void testIfUserFred() {
+    }
+```
+### Using AssertJ with JUnit

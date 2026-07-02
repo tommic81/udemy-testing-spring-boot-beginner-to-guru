@@ -595,3 +595,31 @@ code into a shared repository several times a day. Each check-in is then verifie
     }
 ```
 ### Using AssertJ with JUnit
+```xml
+   <dependency>
+       <groupId>org.assertj</groupId>
+       <artifactId>assertj-core</artifactId>
+       <version>3.11.1</version>
+       <scope>test</scope>
+   </dependency>
+```
+
+### Using Hamcrest with JUnit
+```xml
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+```
+```java
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+ @Test
+ void dependentAssertions() {
+	assertThat(owner.getCity(), is("Key West"));
+
+}
+```

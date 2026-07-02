@@ -661,3 +661,19 @@ class IndexControllerTest {
                 }
             }
 ```
+
+### JUnit Test Interfaces
+- We can define common properties in the interfaces and than implement them by test classes
+
+### Using JUnit Default Test Methods
+```
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Tag("controllers")
+public interface ControllerTests {
+
+    @BeforeAll
+    default void beforeAll(){
+        System.out.println("Lets do something here");
+    }
+}
+```

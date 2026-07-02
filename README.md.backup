@@ -635,7 +635,7 @@ class IndexControllerTest {
 
 ```
 ### JUnit Nested Tests
-- ` @Nested` we use it when test class is nested in another
+- ` @Nested` we use it when test class is nested in another test class
 
 ```
    @DisplayName("Save Owners Tests - ")
@@ -661,3 +661,8 @@ class IndexControllerTest {
                 }
             }
 ```
+
+### JUnit Test Interfaces
+- We can define common properties in the interfaces and than implement them by test classes
+
+### Using JUnit Default Test Methods

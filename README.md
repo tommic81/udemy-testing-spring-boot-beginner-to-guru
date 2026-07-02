@@ -623,3 +623,41 @@ import static org.hamcrest.Matchers.is;
 
 }
 ```
+
+## Advanced JUnit Testing
+### Tagging and Filtering JUnit Tests
+- In run configuration we can set **Tags** for which we want to run the tests
+```
+@Tag("controllers")
+class IndexControllerTest {
+}
+
+
+```
+### JUnit Nested Tests
+- ` @Nested` we use it when test class is nested in another test class
+
+```
+   @DisplayName("Save Owners Tests - ")
+            @Nested
+            class FindOwnersTests {
+
+                @DisplayName("Find Owner")
+                @Test
+                void findOwner() {
+
+                    Owner foundOwner = ownerMapService.findById(1L);
+
+                    assertThat(foundOwner).isNotNull();
+                }
+
+                @DisplayName("Find Owner Not Found")
+                @Test
+                void findOwnerNotFound() {
+
+                    Owner foundOwner = ownerMapService.findById(2L);
+
+                    assertThat(foundOwner).isNull();
+                }
+            }
+```

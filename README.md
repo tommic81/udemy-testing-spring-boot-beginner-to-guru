@@ -703,3 +703,61 @@ public interface ControllerTests {
         System.out.println(testInfo.getDisplayName() + ": " + repetitionInfo.getCurrentRepetition());
     }
 ```
+### JUnit Parameterized Tests - Value Source
+```xml
+   <dependency>
+  	<groupId>org.junit.jupiter</groupId>
+   	<artifactId>junit-jupiter-params</artifactId>
+   	<version>${junit-platform.version}</version>
+   </dependency>
+```
+
+```java
+@ParameterizedTest
+@ValueSource(strings = {"Spring", "Framework", "Guru"})
+void testValueSource(String val) {
+	System.out.println(val);
+}
+```
+### JUnit Parameterized Tests - Display Name
+```java
+  @DisplayName("Value Source Test")
+    @ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+    @ValueSource(strings = {"Spring", "Framework", "Guru"})
+    void testValueSource(String val) {
+        System.out.println(val);
+    }
+```
+
+### JUnit Parameterized Tests - ENUM Source
+- Parameters are taken from Enum
+```java
+  @DisplayName("Enum Source Test")
+    @ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+    @EnumSource(OwnerType.class)
+    void enumTest(OwnerType ownerType) {
+        System.out.println(ownerType);
+    }
+```
+### JUnit Parameterized Tests - CVS Source
+```java
+    @DisplayName("CSV Input Test")
+    @ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+    @CsvSource({
+            "FL, 1, 1",
+            "OH, 2, 2",
+            "MI, 3, 1"
+    })
+    void csvInputTest(String stateName, int val1, int val2) {
+        System.out.println(stateName + " = " + val1 + ":" + val2);
+    }
+```
+### JUnit Parameterized Tests - CVS File Source
+```java
+@DisplayName("CSV From File Test")
+@ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+@CsvFileSource(resources = "/input.csv", numLinesToSkip = 1)
+void csvFromFileTest(String stateName, int val1, int val2) {
+	System.out.println(stateName + " = " + val1 + ":" + val2);
+}
+```

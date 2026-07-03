@@ -781,3 +781,57 @@ static Stream<Arguments> getargs() {
 ### JUnit Parameterized Tests - Custom Provider
 - You can add a class implementing `ArgumentsProvider`
 
+```
+public class CustomArgsProvider implements ArgumentsProvider {
+	@Override
+	public Stream<? extends Arguments> provideArguments(ExtensionContext 	extensionContext) throws Exception {
+        return Stream.of(
+                Arguments.of("FL", 7, 10),
+                Arguments.of("OH", 11, 42),
+                Arguments.of("MI", 44, 77));
+    }
+}
+```
+```
+@DisplayName("Custom Provider Test")
+@ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+@ArgumentsSource(CustomArgsProvider.class)
+void fromCustomProviderTest(String stateName, int val1, int val2) {
+	System.out.println(stateName + " = " + val1 + ":" + val2);
+}
+```
+### Unit Tests vs Integration Tests
+- We should name integration tests with **IT** suffix. They will be executed differently then unit test by Maven.
+
+```
+public class PetTypeSDJpaServiceIT {}
+```
+
+### JUnit Exentions
+
+```java
+public class TimingExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
+    private static final Logger logger = Logger.getLogger(TimingExtension.class.getName());
+
+    private static final String START_TIME = "start time";
+
+    @Override
+    public void beforeTestExecution(ExtensionContext context) throws Exception {
+        getStore(context).put(START_TIME, System.currentTimeMillis());
+    }
+
+    @Override
+    public void afterTestExecution(ExtensionContext context) throws Exception {
+        Method testMethod = context.getRequiredTestMethod();
+        long startTime = getStore(context).remove(START_TIME, long.class);
+        long duration = System.currentTimeMillis() - startTime;
+
+        logger.info(() -> String.format("Method [%s] took %s ms.", testMethod.getName(), duration));
+    }
+
+    private ExtensionContext.Store getStore(ExtensionContext context) {
+        return context.getStore(ExtensionContext.Namespace.create(getClass(), context.getRequiredTestMethod()));
+    }
+}
+```
+

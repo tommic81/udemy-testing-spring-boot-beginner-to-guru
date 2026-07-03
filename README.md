@@ -837,5 +837,46 @@ public class TimingExtension implements BeforeTestExecutionCallback, AfterTestEx
 
 - usage:
 ```
+@ExtendWith(TimingExtension.class)
+public class PetTypeSDJpaServiceIT {}
+```
 
+## Test Execution
+### Maven Surefire Plugin
+- Runs unit tests in **Test** phase
+
+```xml
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-surefire-plugin</artifactId>
+	<version>2.22.0</version>
+	<configuration>
+		<argLine>
+	       --illegal-access=permit
+		</argLine>
+	</configuration>
+</plugin>
+```
+### Maven Failsafe Plugin
+- Runs integration tests in **Verify** phase
+
+```xml
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <argLine>
+                        --illegal-access=permit
+                    </argLine>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 ```

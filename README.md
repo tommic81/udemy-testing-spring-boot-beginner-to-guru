@@ -761,3 +761,20 @@ void csvFromFileTest(String stateName, int val1, int val2) {
 	System.out.println(stateName + " = " + val1 + ":" + val2);
 }
 ```
+
+### JUnit Parameterized Tests - Method Provider
+```java
+@DisplayName("Method Provider Test")
+@ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+@MethodSource("getargs")
+void fromMethodTest(String stateName, int val1, int val2) {
+	System.out.println(stateName + " = " + val1 + ":" + val2);
+}
+
+static Stream<Arguments> getargs() {
+	return Stream.of(
+	    Arguments.of("FL", 5, 1),
+	    Arguments.of("OH", 2, 8),
+	    Arguments.of("MI", 3, 5));
+}
+```

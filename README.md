@@ -778,3 +778,16 @@ static Stream<Arguments> getargs() {
 	    Arguments.of("MI", 3, 5));
 }
 ```
+### JUnit Parameterized Tests - Custom Provider
+- You can add a class implementing `ArgumentsProvider`
+
+```
+```
+```
+@DisplayName("Custom Provider Test")
+@ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+@ArgumentsSource(CustomArgsProvider.class)
+void fromCustomProviderTest(String stateName, int val1, int val2) {
+	System.out.println(stateName + " = " + val1 + ":" + val2);
+}
+```

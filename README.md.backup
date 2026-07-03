@@ -769,12 +769,15 @@ void csvFromFileTest(String stateName, int val1, int val2) {
 @MethodSource("getargs")
 void fromMethodTest(String stateName, int val1, int val2) {
 	System.out.println(stateName + " = " + val1 + ":" + val2);
-   }
+}
 
-    static Stream<Arguments> getargs() {
-        return Stream.of(
-                Arguments.of("FL", 5, 1),
-                Arguments.of("OH", 2, 8),
-                Arguments.of("MI", 3, 5));
-    }
+static Stream<Arguments> getargs() {
+	return Stream.of(
+	    Arguments.of("FL", 5, 1),
+	    Arguments.of("OH", 2, 8),
+	    Arguments.of("MI", 3, 5));
+}
 ```
+### JUnit Parameterized Tests - Custom Provider
+- You can add a class implementing `ArgumentsProvider`
+

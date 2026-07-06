@@ -1166,3 +1166,26 @@ public class Spring5RecipeAppApplicationTests {
     }
 }
 ```
+### Removing JUnit 4
+```xml
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>test</scope>
+		</dependency>
+```
+- Remove **junit-vintage-engine**
+
+```xml
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit-platform.version}</version>
+		</dependency>
+```

@@ -1106,7 +1106,7 @@ jobs:
 ```
 
 ### Converting JUnit 4 Tests to JUnit 5
-- Changed imports and `@Before` to  	@BeforeEach
+- Changed imports and `@Before` to  	@BeforeEach	
 ```
 
 import org.junit.jupiter.api.BeforeEach;
@@ -1155,3 +1155,37 @@ public class IndexControllerTest {
 }
 ```
 - Replaceing `@RunWith(SpringRunner.class)` with `@ExtendWith(SpringExtension.class)`
+
+```
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+public class Spring5RecipeAppApplicationTests {
+
+    @Test
+    public void contextLoads() {
+    }
+}
+```
+### 
+```xml
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>test</scope>
+		</dependency>
+```
+- Remove junit-vintage-engine
+
+```
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit-platform.version}</version>
+		</dependency>
+```

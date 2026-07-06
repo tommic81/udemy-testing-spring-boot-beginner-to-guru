@@ -987,3 +987,6 @@ jobs:
 
 ### Gradle JUnit test reports
 - find html report under : **/build/reports/tests/test/index.html**
+
+## JUnit 4 to JUnit 5 Migration Guide
+### JUnit 4 Example Project

@@ -985,5 +985,7 @@ jobs:
 ### Integration Tests with Gradle
 - [Getting Started With Gradle: Integration Testing](https://www.petrikainulainen.net/programming/gradle/getting-started-with-gradle-integration-testing/)
 
-### Gradle JUniter test reports
+### Gradle JUnit test reports
 - find html report under : **/build/reports/tests/test/index.html**
+
+## JUnit 4 to JUnit 5 Migration Guide

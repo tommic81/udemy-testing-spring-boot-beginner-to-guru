@@ -1229,13 +1229,51 @@ Can throw an exception if an unexpected invocation is detected
     	<groupId>org.mockito</groupId>
     	<artifactId>mockito-core</artifactId>
     	<version>${mockito.version}</version>
-    <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.mockito</groupId>
+    	<artifactId>mockito-junit-jupiter</artifactId>
+    	<version>${mockito.version}</version>
+    	<scope>test</scope>
+    </dependency>
     
+```
+### Creating Mockito Mocks Inline
+```java
+Map mapMock = mock(Map.class);
+```
+
+### Creating Mockito Mocks with Annotations
+```
+public class AnnotationMocksTest {
+    @Mock
+    Map<String, Object> mapMock;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    void testMock() {
+        mapMock.put("keyvalue", "foo");
+    }
+}
+```
+
+### JUnit Mockito Extension
+
+```
+//init mocks
+@ExtendWith(MockitoExtension.class)
+public class JUnitExtensionTest {
+    @Mock
+    Map<String, Object> mapMock;
+
+    @Test
+    void testMock() {
+        mapMock.put("keyvalue", "foo");
+    }
+}
 ```

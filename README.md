@@ -990,3 +990,117 @@ jobs:
 
 ## JUnit 4 to JUnit 5 Migration Guide
 ### JUnit 4 Example Project
+- junit4-legacy-app
+### Differences Between JUnit 4 and JUnit 5
+- Test Annotations
+
+|JUnit 4|JUnit 5|
+|--------|-----------|
+| @Before|@BeforeEach|
+| @After|@AfterEach|
+| @BeforeClass|@BeforeAll|
+| @AfterClass|@AfterAll|
+| @Ignored|@Disabled|
+| @Category|@Tag|
+| @RunWith(SpringJUnit4ClassRunner.class)|@ExtendWith(SpringExtension.class)|
+|@Test(expected=Foo.class)|Assertions.assertThrows(FooException.class)|
+|@Test(timeout = 1)|Assertions.assertTimeout(Duration...)|
+
+- JUnit 4 Support Under JUnit 5
+  - JUnit 4 tests can be run via JUnit 5
+  - Helps provide easy migration path to JUnit 5
+  - Add artifact ‘junit-vintage-engine’ to classpath
+  - Enables support for JUnit 3 and JUnit 4 tests
+    - Tests are executed using JUnit 5 engine
+  - Some features not fully supported (details coming)
+  - Java 1.8 or Higher is Required
+  
+- JUnit 4 Category Support
+  - JUnit 4 Categories become ‘tags’ under JUnit 5
+  - Category is exposed as fully qualified class name.
+  - Example: @Category(Foo.class)
+  - JUnit 5 Tag = “com.example.Foo”
+
+- Migration Tips
+  - Annotations reside in the org.junit.jupiter.api package.
+  - Assertions reside in org.junit.jupiter.api.Assertions.
+  - Assumptions reside in org.junit.jupiter.api.Assumptions.
+  - @Rule and @ClassRule no longer exist; superseded by @ExtendWith
+  - NOTE - First slide shows key annotation differences
+  
+- Limited Rule Support in JUnit 5 Vintage
+  - JUnit 5 Jupiter does no support JUnit 4 Rules natively
+  - Library junit-jupiter-migrationsupport provides limited Rule support:
+    - org.junit.rules.ExternalResource (including org.junit.rules.TemporaryFolder)
+    - org.junit.rules.Verifier (including org.junit.rules.ErrorCollector)
+    - org.junit.rules.ExpectedException
+  - NOTE - Feature is experimental, see current documentation for additional details
+  
+### JUnit 5 Maven Dependencies and Configuration
+- `junit-vintage-engine` - an adapteer needed when JUnit 5 runs JUnit 4 tests
+
+```xml
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<jaxb.version>2.3.0</jaxb.version>
+		<junit-platform.version>5.3.1</junit-platform.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit-platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit-platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit-platform.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<argLine>
+						--illegal-access=permit
+					</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<argLine>
+						--illegal-access=permit
+					</argLine>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+```

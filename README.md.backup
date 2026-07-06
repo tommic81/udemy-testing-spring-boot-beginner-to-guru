@@ -904,23 +904,7 @@ public class PetTypeSDJpaServiceIT {}
 ```
 ### Executing JUnit Test with Tags in Maven
 - [JUnit5 Tags](https://docs.junit.org/5.14.4/running-tests/tags.html)
-- [Filtering by Tags](  <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
-                <configuration>
-                    <argLine>
-                        --illegal-access=permit
-                    </argLine>
-                    <!--<groups>model</groups>-->
-                    <!--<excludedGroups>controllers</excludedGroups>-->
-                </configuration>
-            </plugin>)
+- [Filtering by Tags](https://docs.junit.org/5.14.4/running-tests/build-support.html#maven-filter-tags)
 
 ```
   <plugin>
@@ -940,4 +924,53 @@ public class PetTypeSDJpaServiceIT {}
                     <!--<excludedGroups>controllers</excludedGroups>-->
                 </configuration>
             </plugin>
+```
+
+### Running Tests from CI Builds With Maven
+- [CircleCI](https://circleci.com/integrations/github/)
+- config.yml
+```yml
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+    build:
+        docker:
+            # specify the version you desire here
+            - image: circleci/openjdk:11-browsers-legacy
+
+            # Specify service dependencies here if necessary
+            # CircleCI maintains a library of pre-built images
+            # documented at https://circleci.com/docs/2.0/circleci-images/
+            # - image: circleci/postgres:9.4
+
+        working_directory: ~/repo
+
+        environment:
+            # Customize the JVM maximum heap limit
+            MAVEN_OPTS: -Xmx3200m
+
+        steps:
+            - checkout
+
+            # Download and cache dependencies
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ checksum "pom.xml" }}
+                      # fallback to using the latest cache if no exact match is found
+                      - v1-dependencies-
+
+            - run: mvn dependency:go-offline
+
+            - save_cache:
+                  paths:
+                      - ~/.m2
+                  key: v1-dependencies-{{ checksum "pom.xml" }}
+
+            # run tests!
+            - run: mvn integration-test
+
+
 ```

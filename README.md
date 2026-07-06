@@ -861,22 +861,67 @@ public class PetTypeSDJpaServiceIT {}
 - Runs integration tests in **Verify** phase
 
 ```xml
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-failsafe-plugin</artifactId>
+	<version>2.22.0</version>
+	<configuration>
+		<argLine>
+	        --illegal-access=permit
+		</argLine>
+	</configuration>
+	<executions>
+		<execution>
+			<goals>
+		 		<goal>integration-test</goal>
+				<goal>verify</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+```
+### Maven SurefireTest Reporting
+- HTML report will be generated in **SITE** directory
+```xml
+ 	<build>
+  		<plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.22.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
+```
+### Executing JUnit Test with Tags in Maven
+- [JUnit5 Tags](https://docs.junit.org/5.14.4/running-tests/tags.html)
+- [Filtering by Tags](https://docs.junit.org/5.14.4/running-tests/build-support.html#maven-filter-tags)
+
+```
+  <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
                 <configuration>
                     <argLine>
                         --illegal-access=permit
                     </argLine>
+                    <!--<groups>model</groups>-->
+                    <!--<excludedGroups>controllers</excludedGroups>-->
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 ```

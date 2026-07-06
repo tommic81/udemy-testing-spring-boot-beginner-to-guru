@@ -1104,3 +1104,65 @@ jobs:
 		</plugins>
 	</build>
 ```
+
+### Converting JUnit 4 Tests to JUnit 5
+- Changed imports and `@Before` to  	@BeforeEach	
+```
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertEquals;
+
+public class CategoryTest {
+
+    Category category;
+
+    @BeforeEach
+    public void setUp(){
+        category = new Category();
+    }
+
+    @Test
+    public void getId() throws Exception {
+        Long idValue = 4L;
+
+        category.setId(idValue);
+
+        assertEquals(idValue, category.getId());
+    }
+
+    @Test
+    public void getDescription() throws Exception {
+    }
+
+    @Test
+    public void getRecipes() throws Exception {
+    }
+}
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class IndexControllerTest {
+
+    @BeforeEach
+    public void setUp() throws Exception {
+    }
+    @Test
+    public void getIndexPage() {
+    }
+}
+```
+- Replaceing `@RunWith(SpringRunner.class)` with `@ExtendWith(SpringExtension.class)`
+
+```
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+public class Spring5RecipeAppApplicationTests {
+
+    @Test
+    public void contextLoads() {
+    }
+}
+```

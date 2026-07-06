@@ -974,3 +974,16 @@ jobs:
 
 
 ```
+
+### Running JUnit Tests from Gradle
+- In Settings / Build Tools / Gradle - use wrapper 
+
+```
+ ./gradlew clean test
+```
+
+### Integration Tests with Gradle
+- [Getting Started With Gradle: Integration Testing](https://www.petrikainulainen.net/programming/gradle/getting-started-with-gradle-integration-testing/)
+
+### Gradle JUniter test reports
+- find html report under : **/build/reports/tests/test/index.html**

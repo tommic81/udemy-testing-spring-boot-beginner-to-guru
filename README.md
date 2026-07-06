@@ -1189,3 +1189,53 @@ public class Spring5RecipeAppApplicationTests {
 			<version>${junit-platform.version}</version>
 		</dependency>
 ```
+## Getting Started with Mockito
+### Introduction to Mockito
+- Mockito is the most popular mocking framework for testing Java
+-  Mocks (aka Test Doubles) are alternate implementations of objects to replace real objects in tests
+- Works well with Dependency Injection
+- For the class under test, injected dependencies can be mocks
+
+#### Types of Mocks 
+- Dummy - Object used just to get the code to compile
+- Fake - An object that has an implementation, but not production ready
+- Stub - An object with pre-defined answers to method calls
+- Mock - An object with pre-defined answers to method calls, and has expectations of executions.
+Can throw an exception if an unexpected invocation is detected
+- Spy - In Mockito Spies are Mock like wrappers around the actual object
+
+#### Mockito Annotations
+|Annotation|Description|
+|----------|-----------|
+|@Mock|Used to create a mock|
+|@Spy|Used to create a spy|
+|@InjectMocks|Inject mocks / spys into a class under test|
+|@Captor|Captures arguments to Mock|
+
+### Maven Dependencies for Mockito
+
+```
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <junit-platform.version>5.3.1</junit-platform.version>
+        <mockito.version>2.23.0</mockito.version>
+    </properties>
+    
+    <dependency>
+    	<groupId>org.mockito</groupId>
+    	<artifactId>mockito-core</artifactId>
+    	<version>${mockito.version}</version>
+    <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    
+```

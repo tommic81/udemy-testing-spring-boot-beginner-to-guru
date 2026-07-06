@@ -1277,3 +1277,79 @@ public class JUnitExtensionTest {
     }
 }
 ```
+
+### Injecting Mocks with Mockito
+```java
+@ExtendWith(MockitoExtension.class)
+class SpecialitySDJpaServiceTest {
+	// creates an instance and injects mocks
+    @Mock
+    SpecialtyRepository specialtyRepository;
+
+    @InjectMocks
+    SpecialitySDJpaService service;
+
+    @Test
+    void deleteById() {
+        service.deleteById(1l);
+    }
+
+    @Test
+    void testDelete() {
+        service.delete(new Speciality());
+    }
+}
+```
+
+### Verify Interactions with Mockito Mocks
+- VerificationModes: `times()`, `atLeastOnce()`, `atMost()`, `never()`
+
+```
+@ExtendWith(MockitoExtension.class)
+class SpecialitySDJpaServiceTest {
+    @Mock
+    SpecialtyRepository specialtyRepository;
+
+    @InjectMocks
+    SpecialitySDJpaService service;
+
+    @Test
+    void deleteById() {
+        service.deleteById(1l);
+        service.deleteById(1l);
+
+        verify(specialtyRepository, times(2)).deleteById(1l);
+    }
+
+    @Test
+    void deleteByIdAtLeast() {
+        service.deleteById(1l);
+        service.deleteById(1l);
+
+        verify(specialtyRepository, atLeastOnce()).deleteById(1l);
+    }
+
+    @Test
+    void deleteByIdAtMost() {
+        service.deleteById(1l);
+        service.deleteById(1l);
+
+        verify(specialtyRepository, atMost(5)).deleteById(1l);
+    }
+
+    @Test
+    void deleteByIdNever() {
+        service.deleteById(1l);
+        service.deleteById(1l);
+
+        verify(specialtyRepository, atLeastOnce()).deleteById(1l);
+
+        verify(specialtyRepository, never()).deleteById(5L);
+    }
+
+    @Test
+    void testDelete() {
+        service.delete(new Speciality());
+    }
+}
+```

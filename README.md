@@ -1353,3 +1353,13 @@ class SpecialitySDJpaServiceTest {
     }
 }
 ```
+
+### Returning values from Mockito mocks
+
+```
+   Speciality speciality = new Speciality();
+
+   when(specialtyRepository.findById(1L)).thenReturn(Optional.of(speciality));
+```
+
+### 

@@ -1302,7 +1302,7 @@ class SpecialitySDJpaServiceTest {
 ```
 
 ### Verify Interactions with Mockito Mocks
-- VerificationModes: `times()`, ``
+- VerificationModes: `times()`, `atLeastOnce()`, `atMost()`, `never()`
 
 ```
 @ExtendWith(MockitoExtension.class)
@@ -1353,3 +1353,5 @@ class SpecialitySDJpaServiceTest {
     }
 }
 ```
+
+### Returning values from Mockito mocks

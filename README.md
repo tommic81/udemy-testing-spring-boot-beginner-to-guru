@@ -1362,4 +1362,9 @@ class SpecialitySDJpaServiceTest {
    when(specialtyRepository.findById(1L)).thenReturn(Optional.of(speciality));
 ```
 
-### 
+### Argument Matchers
+```
+  
+    verify(specialtyRepository).delete(any(Speciality.class));
+    
+```

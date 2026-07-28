@@ -1408,3 +1408,21 @@ class SpecialitySDJpaServiceTest {
 ```
 ### BDD Verification in Mockito
 
+```
+    @Test
+    void findByIdBddTest() {
+        Speciality speciality = new Speciality();
+
+        given(specialtyRepository.findById(1L)).willReturn(Optional.of(speciality));
+
+        Speciality foundSpecialty = service.findById(1L);
+
+        assertThat(foundSpecialty).isNotNull();
+        
+        then(specialtyRepository).should().findById(anyLong());
+        then(specialtyRepository).shouldHaveNoMoreInteractions();
+    }
+```
+## Advanced Mockito
+### Throwing exceptions with Mockito
+

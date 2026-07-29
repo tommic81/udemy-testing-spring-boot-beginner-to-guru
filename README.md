@@ -1597,5 +1597,13 @@ class SpecialitySDJpaServiceTest {
 - Check if a method has finished within a pecified time (ms)
 
 ```
+then(specialtyRepository).should(timeout(100)).findById(anyLong());
+
 then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
+```
+
+### Verify Zero or No More Interactions with Mock
+```
+	verifyNoMoreInteractions(ownerService);
+	verifyZeroInteractions(model);        
 ```

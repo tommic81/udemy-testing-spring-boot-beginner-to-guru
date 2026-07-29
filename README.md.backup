@@ -1605,5 +1605,9 @@ then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
 ### Verify Zero or No More Interactions with Mock
 ```
 	verifyNoMoreInteractions(ownerService);
-	        
+	verifyZeroInteractions(model);        
 ```
+
+### Using Mockito Spies
+- Spy acks like a wrapper
+- Allows to access an underlying object 

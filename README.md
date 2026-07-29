@@ -1607,3 +1607,12 @@ then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
 	verifyNoMoreInteractions(ownerService);
 	verifyZeroInteractions(model);        
 ```
+
+### Using Mockito Spies
+- Spy acks like a wrapper
+- Allows to access an underlying object
+
+```
+    @Spy
+    PetMapService petService;
+```

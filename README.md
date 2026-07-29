@@ -1505,3 +1505,43 @@ class SpecialitySDJpaServiceTest {
     }
 
 ```
+### Mockito Argument Capture
+- Standart - inline captor
+```
+    @Test
+    void processFindFormWildcardString() {
+        //given
+        Owner owner = new Owner(1l, "Joe", "Buck");
+        List<Owner> ownerList = new ArrayList<>();
+        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        given(ownerService.findAllByLastNameLike(captor.capture())).willReturn(ownerList);
+
+        //when
+        String viewName = ownerController.processFindForm(owner, bindingResult, null);
+
+        //then
+        assertThat("%Buck%").isEqualToIgnoringCase(captor.getValue());
+    }
+```
+- Annotation Captor
+
+```
+    @Captor
+    ArgumentCaptor<String> stringArgumentCaptor;
+    
+    @Test
+    void processFindFormWildcardStringAnnotation() {
+    //given
+    Owner owner = new Owner(1l, "Joe", "Buck");
+    List<Owner> ownerList = new ArrayList<>();
+    given(ownerService.findAllByLastNameLike(stringArgumentCaptor.capture())).willReturn(ownerList);
+
+    //when
+    String viewName = ownerController.processFindForm(owner, bindingResult, null);
+
+    //then
+     ssertThat("%Buck%").isEqualToIgnoringCase(stringArgumentCaptor.getValue());
+    }
+```
+
+### Using Mockito Answers

@@ -1458,6 +1458,7 @@ class SpecialitySDJpaServiceTest {
 
 ### Java 8 Lambda Argument Matchers
 - `argThat(LAMBA_CONDITION)` - mocking on the condition 
+- We have to set lenient `@Mock(lenient = true)` as junit uses a strict matching
 ```java
 
     @Mock(lenient = true)
@@ -1504,3 +1505,28 @@ class SpecialitySDJpaServiceTest {
     }
 
 ```
+### Mockito Argument Capture
+- Standart - inline captor
+```
+    @Test
+    void processFindFormWildcardString() {
+        //given
+        Owner owner = new Owner(1l, "Joe", "Buck");
+        List<Owner> ownerList = new ArrayList<>();
+        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        given(ownerService.findAllByLastNameLike(captor.capture())).willReturn(ownerList);
+
+        //when
+        String viewName = ownerController.processFindForm(owner, bindingResult, null);
+
+        //then
+        assertThat("%Buck%").isEqualToIgnoringCase(captor.getValue());
+    }
+```
+- Annotation Captor
+
+```
+    @Captor
+    ArgumentCaptor<String> stringArgumentCaptor;
+```
+### Using Mockito Answers

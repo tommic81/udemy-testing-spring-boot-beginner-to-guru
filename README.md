@@ -1615,4 +1615,9 @@ then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
 ```
     @Spy
     PetMapService petService;
+    
+    petService.save(pet);
+    petService.save(pet3);
+
+    given(petService.findById(anyLong())).willCallRealMethod();
 ```

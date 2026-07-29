@@ -1545,3 +1545,29 @@ class SpecialitySDJpaServiceTest {
 ```
 
 ### Using Mockito Answers
+- When we want to add more logic to mocking code
+
+```
+    @BeforeEach
+    void setUp() {
+        given(ownerService.findAllByLastNameLike(stringArgumentCaptor.capture()))
+                .willAnswer(invocation -> {
+                    List<Owner> owners = new ArrayList<>();
+
+                    String name = invocation.getArgument(0);
+
+                    if (name.equals("%Buck%")) {
+                        owners.add(new Owner(1l, "Joe", "Buck"));
+                        return owners;
+                    } else if (name.equals("%DontFindMe%")) {
+                        return owners;
+                    } else if (name.equals("%FindMe%")) {
+                        owners.add(new Owner(1l, "Joe", "Buck"));
+                        owners.add(new Owner(2l, "Joe2", "Buck2"));
+                        return owners;
+                    }
+
+                    throw new RuntimeException("Invalid Argument");
+                });
+    }
+```

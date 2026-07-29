@@ -1573,3 +1573,29 @@ class SpecialitySDJpaServiceTest {
 ```
 ### Verify order of Interactions
 - Checks the order of interactions with mocks
+
+```
+   @Test
+    void processFindFormWildcardFound() {
+        //given
+        Owner owner = new Owner(1l, "Joe", "FindMe");
+        InOrder inOrder = inOrder(ownerService, model);
+
+        //when
+        String viewName = ownerController.processFindForm(owner, bindingResult, model);
+
+        //then
+        assertThat("%FindMe%").isEqualToIgnoringCase(stringArgumentCaptor.getValue());
+        assertThat("owners/ownersList").isEqualToIgnoringCase(viewName);
+
+        // inorder asserts
+        inOrder.verify(ownerService).findAllByLastNameLike(anyString());
+        inOrder.verify(model).addAttribute(anyString(), anyList());
+    }
+```
+### Verify Interactions within Specified Time
+- Check if a method has finished within a pecified time (ms)
+
+```
+then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
+```

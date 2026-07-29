@@ -1547,10 +1547,10 @@ class SpecialitySDJpaServiceTest {
 ### Using Mockito Answers
 - When we want to add more logic to mocking code
 
-```
+```java
     @BeforeEach
     void setUp() {
-        given(ownerService.findAllByLastNameLike(stringArgumentCaptor.capture()))
+    given(ownerService.findAllByLastNameLike(stringArgumentCaptor.capture()))
                 .willAnswer(invocation -> {
                     List<Owner> owners = new ArrayList<>();
 
@@ -1571,3 +1571,5 @@ class SpecialitySDJpaServiceTest {
                 });
     }
 ```
+### Verify order of Interactions
+- Checks the order of interactions with mocks

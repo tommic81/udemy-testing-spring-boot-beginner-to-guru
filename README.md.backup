@@ -1615,4 +1615,86 @@ then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
 ```
     @Spy
     PetMapService petService;
+    
+    petService.save(pet);
+    petService.save(pet3);
+
+    given(petService.findById(anyLong())).willCallRealMethod();
 ```
+
+## Testing with Spring Framework
+### Introduction
+#### Spring Framework Testing Features
+- Mock Objects
+  - Environment - Mock Environment and Properties Source
+  - JNDI - Mock of JNDI lookup
+  - Servlet API - For testing of web environment
+  - Spring Web Reactive - Testing of reactive web environment
+  
+#### Testing Utilities
+- ReflectionTestUtils - allows use of refection to modify private fields
+  - Spring can autowire private properties - (Considered a poor practice)
+  - Can also be used to hook into bean lifecycle events
+- AOP Utils - Helps with testing of AOP
+
+#### Spring MVC Test
+- Spring MVC Test - Robust framework for testing controller interactions
+  - MockHttpServletRequest - Mock implementation of request / response
+  - MockHttpSession - Mock of Http Session
+  - ModleAndViewAssert - assertion utilities
+- Framework allows testing of web requests without the need of a running container
+- Allows true unit tests for controller
+  - Tests run much faster when the web context is not started
+  
+#### Spring Integration Testing
+- Integration testing is when the Spring Context is started to support the test
+- Loading the Spring Context is considered an expensive operation
+  - Can take 10 - 40 seconds to load context
+  - Depending on complexity of project and hardware
+- Spring will cache the context between tests to improve performance
+- Dependency Injection - Spring can be used to inject beans into test classes
+- Transaction Management - By default Spring will automatically rollback database transactions
+
+#### JDBC Testing Support
+- JdbcTemplate - Spring will configure an instance of JdbcTemplate for testing support
+- JdbcTestUtils - Collection of utilities to assist with database testing
+  - countRowsInTable
+  - countRowsInTableWhere
+  - deleteFromTables
+  - deleteFromTablesWhere
+  - dropTables
+  
+#### Embedded Database Support
+- Spring provides support for popular in-memory Java
+databases
+- Very useful for testing database interactions
+- Supported natively by Spring:
+  - H2
+  - HSQL
+  - Derby
+- H2 has a nice web based DB console
+
+#### Spring Framework Testing Annotations
+- @BootstrapWith - Class-level annotation to configure how the test context is bootstrapped
+- @ContextConfiguration - Class-level annotation to configure the application context
+- @WebAppConfigurtation - Class-level annotation to configure a web application context
+- @ContextHiearchy - Class-level annotation to set multiple @ContextConfigurations
+- @ActiveProfiles - Class-level annotation to set active profiles for test
+- @TestPropertySource - Class-level annotation to set property sources for test
+- @DirtiesContext - Class or method level annotation which tells Spring to re-load context after
+test - (slows down your tests)
+
+#### Spring Framework Testing Annotations
+- @TestExecutionListeners - Used to configure test execution listeners
+- @Commit - Class or method level annotation to commit action of test to database.
+- @Rollback - Class or method level annotation to rollback action of test from database.
+- @BeforeTransaction - run a method which returns void before a transaction is started
+- @AfterTransaction - run a method which returns void after a transaction has completed
+- @Sql - Used to configure SQL scripts to run before a test
+- @SqlConfig - Configuration for the parsing of SQL scripts
+- @SqlGroup - Configure a grouping of SQL scripts
+#### JUnit 4 Testing Annotations
+- @IfProvileValue - Enable test for specific environments
+- @ProfileValueSourceConfiguration - Class-level annotation to configure how profile values are retrieved
+- @Timed - Require test to complete within a period of time
+- @Repeat - Repeat test x number of times

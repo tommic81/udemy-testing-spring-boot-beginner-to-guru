@@ -1741,3 +1741,27 @@ public class HearingInterpreterLaurelTest {
     }
 }
 ```
+
+### Using Inner Class Configuration
+```
+@SpringJUnitConfig(classes = HearingInterpreterInnerClassTest.TestConfig.class)
+public class HearingInterpreterInnerClassTest {
+    @Configuration
+    static class TestConfig {
+
+        @Bean
+        HearingInterpreter hearingInterpreter() {
+            return new HearingInterpreter(new LaurelWordProducer());
+        }
+    }
+
+    @Autowired
+    HearingInterpreter hearingInterpreter;
+
+    @Test
+    void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+        assertEquals("Laurel", word);
+    }
+```

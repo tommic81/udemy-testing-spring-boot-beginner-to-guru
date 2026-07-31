@@ -1725,3 +1725,19 @@ public class HearingInterpreterTest {
     }
 }
 ```
+### JUnit 5 Laurel Test
+```
+@SpringJUnitConfig(classes = {BaseConfig.class, LaurelConfig.class})
+public class HearingInterpreterLaurelTest {
+
+    @Autowired
+    HearingInterpreter hearingInterpreter;
+
+    @Test
+    void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+        assertEquals("Laurel", word);
+    }
+}
+```

@@ -1709,4 +1709,20 @@ test - (slows down your tests)
 
 ## Spring Framework Testing Context
 ### JUnit 4 Laurel Test
+```
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {BaseConfig.class, LaurelConfig.class})
+public class HearingInterpreterTest {
+    @Autowired
+    HearingInterpreter hearingInterpreter;
 
+    @Test
+    public void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+
+        assertEquals("Laurel", word);
+    }
+}
+```
+### JUnit 5 Laurel Test

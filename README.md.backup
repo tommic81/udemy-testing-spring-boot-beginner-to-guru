@@ -1767,3 +1767,24 @@ public class HearingInterpreterInnerClassTest {
 ```
 
 ### Using Component Scans
+```
+@SpringJUnitConfig(classes = HearingInterpreterComponentScanTest.TestConfig.class)
+public class HearingInterpreterComponentScanTest {
+    @Configuration
+    @ComponentScan("org.springframework.samples.petclinic.sfg")
+    static class TestConfig {
+
+    }
+
+    @Autowired
+    HearingInterpreter hearingInterpreter;
+
+    @Test
+    void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+        assertEquals("Laurel", word);
+    }
+}
+```
+### Setting Active Profiles for Tests

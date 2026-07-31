@@ -1807,7 +1807,31 @@ public class HearingInterpreterActiveProfileTest {
 ```
 
 ### Spring Test Propereties
-- 
+- yanny.properties
 ```properties
 say.word=YaNNy
+```
+- PropertiesTest.java
+```
+@TestPropertySource("classpath:yanny.properties")
+@ActiveProfiles("externalized")
+@SpringJUnitConfig(classes = PropertiesTest.TestConfig.class)
+public class PropertiesTest {
+
+    @Configuration
+    @ComponentScan("org.springframework.samples.petclinic.sfg")
+    static class TestConfig {
+
+    }
+
+    @Autowired
+    HearingInterpreter hearingInterpreter;
+
+    @Test
+    void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+        assertEquals("YaNNy", word);
+    }
+}
 ```

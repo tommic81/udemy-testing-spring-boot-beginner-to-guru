@@ -1806,7 +1806,7 @@ public class HearingInterpreterActiveProfileTest {
 }
 ```
 
-### Spring Test Propereties
+### Spring Test Properties
 - yanny.properties
 ```properties
 say.word=YaNNy

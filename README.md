@@ -1789,5 +1789,49 @@ public class HearingInterpreterComponentScanTest {
 ```
 ### Setting Active Profiles for Tests
 ```
+@Profile("yanny")
+@Primary
+@Component
+public class YannyWordProducer implements WordProducer{
+    @Override
+    public String getWord() {
+        return "Yanny";
+    }
+}
 
+@ActiveProfiles("yanny")
+@SpringJUnitConfig(classes = HearingInterpreterActiveProfileTest.TestConfig.class)
+public class HearingInterpreterActiveProfileTest {
+
+}
+```
+
+### Spring Test Propereties
+- yanny.properties
+```properties
+say.word=YaNNy
+```
+- PropertiesTest.java
+```
+@TestPropertySource("classpath:yanny.properties")
+@ActiveProfiles("externalized")
+@SpringJUnitConfig(classes = PropertiesTest.TestConfig.class)
+public class PropertiesTest {
+
+    @Configuration
+    @ComponentScan("org.springframework.samples.petclinic.sfg")
+    static class TestConfig {
+
+    }
+
+    @Autowired
+    HearingInterpreter hearingInterpreter;
+
+    @Test
+    void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+        assertEquals("YaNNy", word);
+    }
+}
 ```

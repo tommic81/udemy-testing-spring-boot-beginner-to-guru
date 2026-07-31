@@ -1706,3 +1706,22 @@ test - (slows down your tests)
 @ExtendWith(SpringExtension.class) to configure the Spring Context for the test
 - @EnabledIf - Conditional execution of test
 - @DisabledIf - Conditional execution of test
+
+## Spring Framework Testing Context
+### JUnit 4 Laurel Test
+```
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {BaseConfig.class, LaurelConfig.class})
+public class HearingInterpreterTest {
+    @Autowired
+    HearingInterpreter hearingInterpreter;
+
+    @Test
+    public void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+
+        assertEquals("Laurel", word);
+    }
+}
+```

@@ -1698,3 +1698,15 @@ test - (slows down your tests)
 - @ProfileValueSourceConfiguration - Class-level annotation to configure how profile values are retrieved
 - @Timed - Require test to complete within a period of time
 - @Repeat - Repeat test x number of times
+
+#### Spring JUnit 5 Testing Annotations
+- @SpringJUnitConfig - Combines @ContextConfiguration with
+@ExtendWith(SpringExtension.class) to configure the Spring Context for the test
+- @SpringJUnitWebConfig - Combines @ContextConfiguration and @WebAppConfiguration with
+@ExtendWith(SpringExtension.class) to configure the Spring Context for the test
+- @EnabledIf - Conditional execution of test
+- @DisabledIf - Conditional execution of test
+
+## Spring Framework Testing Context
+### JUnit 4 Laurel Test
+

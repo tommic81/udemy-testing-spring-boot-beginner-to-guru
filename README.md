@@ -1765,3 +1765,25 @@ public class HearingInterpreterInnerClassTest {
         assertEquals("Laurel", word);
     }
 ```
+
+### Using Component Scans
+```
+@SpringJUnitConfig(classes = HearingInterpreterComponentScanTest.TestConfig.class)
+public class HearingInterpreterComponentScanTest {
+    @Configuration
+    @ComponentScan("org.springframework.samples.petclinic.sfg")
+    static class TestConfig {
+
+    }
+
+    @Autowired
+    HearingInterpreter hearingInterpreter;
+
+    @Test
+    void whatIheard() {
+        String word = hearingInterpreter.whatIheard();
+
+        assertEquals("Laurel", word);
+    }
+}
+```

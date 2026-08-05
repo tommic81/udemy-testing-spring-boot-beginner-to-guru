@@ -1902,3 +1902,12 @@ public class OwnerControllerTest {
 ```
 
 ### Using Spring MVC Test with Form Parameters
+```
+   @Test
+    void testFindByNameNotFound() throws Exception {
+        mockMvc.perform(get("/owners")
+                        .param("lastName", "Dont find ME!"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/findOwners"));
+    }
+```

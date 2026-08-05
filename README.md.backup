@@ -1901,4 +1901,4 @@ public class OwnerControllerTest {
 }
 ```
 
-### Using Sptring MVC Test with Form Parameters
+### Using Spring MVC Test with Form Parameters

@@ -1894,3 +1894,9 @@ class VetControllerTest {
 	}
 }
 ``` 
+### Spring Web Configuration with XML
+```
+@SpringJUnitWebConfig(locations = {"classpath:spring/mvc-test-config.xml", "classpath:spring/mvc-core-config.xml"})
+public class OwnerControllerTest {
+}
+```

@@ -1911,3 +1911,16 @@ public class OwnerControllerTest {
                 .andExpect(view().name("owners/findOwners"));
     }
 ```
+### Using Spring MVC Test for Form Post
+```
+    @Test
+    void testNewOwnerPostValid() throws Exception {
+        mockMvc.perform(post("/owners/new")
+                        .param("firstName", "Jimmy")
+                        .param("lastName", "Buffett")
+                        .param("Address", "123 Duval St ")
+                        .param("city", "Key West")
+                        .param("telephone", "3151231234"))
+                .andExpect(status().is3xxRedirection());
+    }
+```

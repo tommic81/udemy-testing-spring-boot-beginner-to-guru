@@ -1924,3 +1924,5 @@ public class OwnerControllerTest {
                 .andExpect(status().is3xxRedirection());
     }
 ```
+
+### Using Spring MVC Test for Validation Errors

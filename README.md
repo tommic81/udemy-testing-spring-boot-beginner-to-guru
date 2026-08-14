@@ -2124,3 +2124,22 @@ or Gson.
     }
 
 ```
+### @WebMVC Test Slice
+- Context is started
+- Reset is needed as `beerService` is now a Spring component 
+```
+@WebMvcTest(BeerController.class)
+class BeerControllerTest {
+    @MockBean
+    BeerService beerService;
+
+    @Autowired
+    MockMvc mockMvc;
+    
+    @AfterEach
+    void tearDown() {
+        reset(beerService);
+    }
+    
+}
+```

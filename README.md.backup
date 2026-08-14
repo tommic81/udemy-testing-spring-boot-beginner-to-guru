@@ -2093,7 +2093,7 @@ or Gson.
     }
 ```
 ### Using Custom Message Converters with Spring MVC Test
-- Configuring 
+- Configuring Timestamp mapping
 
 ```
    @BeforeEach
@@ -2123,4 +2123,23 @@ or Gson.
         return new MappingJackson2HttpMessageConverter(objectMapper);
     }
 
+```
+### @WebMVC Test Slice
+- Context is started
+- Reset is needed as `beerService 
+```
+@WebMvcTest(BeerController.class)
+class BeerControllerTest {
+    @MockBean
+    BeerService beerService;
+
+    @Autowired
+    MockMvc mockMvc;
+    
+    @AfterEach
+    void tearDown() {
+        reset(beerService);
+    }
+    
+}
 ```

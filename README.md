@@ -2029,3 +2029,16 @@ or Gson.
 - **JsonPath** helps to inspects the JSON object
 - [JsonPath](https://github.com/json-path/JsonPath)
 ### Using JsonPath in MockMVC Tests
+```
+    @Test
+    void testGetBeerById() throws Exception {
+        given(beerService.findBeerById(any())).willReturn(validBeer);
+
+        mockMvc.perform(get("/api/v1/beer/" + validBeer.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.id", is(validBeer.getId().toString())))
+                .andExpect(jsonPath("$.beerName", is("Beer1")));
+
+    }
+```

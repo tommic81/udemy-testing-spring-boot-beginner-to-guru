@@ -2024,3 +2024,8 @@ or Gson.
         </dependency>
     </dependencies>
 ```
+## Spring MVC Rest Controller Tests
+### Jayway JsonPath
+- **JsonPath** helps to inspects the JSON object
+- [JsonPath](https://github.com/json-path/JsonPath)
+### Using JsonPath in MockMVC Tests

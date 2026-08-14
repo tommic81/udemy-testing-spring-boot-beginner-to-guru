@@ -2092,3 +2092,35 @@ or Gson.
         }
     }
 ```
+### Using Custom Message Converters with Spring MVC Test
+- Configuring Timestamp mapping
+
+```
+   @BeforeEach
+    void setUp() {
+        validBeer = BeerDto.builder().id(UUID.randomUUID())
+                .version(1)
+                .beerName("Beer1")
+                .beerStyle(BeerStyleEnum.PALE_ALE)
+                .price(new BigDecimal("12.99"))
+                .quantityOnHand(4)
+                .upc(123456789012L)
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
+                .build();
+        
+        mockMvc = MockMvcBuilders.standaloneSetup(beerController)
+                .setMessageConverters(jackson2HttpMessageConverter()).build();
+    }
+
+    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        objectMapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, true);
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        objectMapper.registerModule(new JavaTimeModule());
+        return new MappingJackson2HttpMessageConverter(objectMapper);
+    }
+
+```

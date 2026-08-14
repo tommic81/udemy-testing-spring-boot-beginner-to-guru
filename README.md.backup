@@ -2126,7 +2126,7 @@ or Gson.
 ```
 ### @WebMVC Test Slice
 - Context is started
-- Reset is needed as `beerService 
+- Reset is needed as `beerService` is now a Spring component 
 ```
 @WebMvcTest(BeerController.class)
 class BeerControllerTest {
@@ -2143,3 +2143,5 @@ class BeerControllerTest {
     
 }
 ```
+### Using Test RestTemplate
+- Starting 

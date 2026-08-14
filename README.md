@@ -2143,3 +2143,40 @@ class BeerControllerTest {
     
 }
 ```
+### Using Test RestTemplate
+- Starting the whole application by the integration test
+
+```
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class BeerControllerIT {
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    void testListBeers() {
+        BeerPagedList beerPagedList = restTemplate.getForObject("/api/v1/beer", BeerPagedList.class);
+
+        assertThat(beerPagedList.getContent()).hasSize(3);
+    }
+}
+```
+
+```
+public class BeerPagedList extends PageImpl<BeerDto> {
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public BeerPagedList(@JsonProperty("content") List<BeerDto> content,
+                         @JsonProperty("number") int number,
+                         @JsonProperty("size") int size,
+                         @JsonProperty("totalElements") Long totalElements,
+                         @JsonProperty("pageable") JsonNode pageable,
+                         @JsonProperty("last") boolean last,
+                         @JsonProperty("totalPages") int totalPages,
+                         @JsonProperty("sort") JsonNode sort,
+                         @JsonProperty("first") boolean first,
+                         @JsonProperty("numberOfElements") int numberOfElements) {
+
+        super(content, PageRequest.of(number, size), totalElements);
+    }
+}
+```
